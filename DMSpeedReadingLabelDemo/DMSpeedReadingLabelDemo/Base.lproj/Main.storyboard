@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QmY-aR-PTl">
+                                <rect key="frame" x="24" y="83" width="552" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="TNi-7m-Sd1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfU-c3-ylj">
+                                <rect key="frame" x="202" y="121" width="197" height="30"/>
+                                <state key="normal" title="Create Speed Reading Label">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCreatePress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L9D-Tz-ODO"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLh-NW-qX9" customClass="DMSpeedReadingLabel">
+                                <rect key="frame" x="96" y="193" width="408" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RfU-c3-ylj" firstAttribute="top" secondItem="QmY-aR-PTl" secondAttribute="bottom" constant="8" id="3Hv-XQ-Tgi"/>
+                            <constraint firstAttribute="centerX" secondItem="RfU-c3-ylj" secondAttribute="centerX" id="5gy-tY-a8H"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LLh-NW-qX9" secondAttribute="trailing" constant="80" id="7lx-SR-TWl"/>
+                            <constraint firstItem="QmY-aR-PTl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="63" id="NUb-2N-AL9"/>
+                            <constraint firstItem="LLh-NW-qX9" firstAttribute="top" secondItem="RfU-c3-ylj" secondAttribute="bottom" constant="42" id="cFx-Qm-2mP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QmY-aR-PTl" secondAttribute="trailing" constant="8" id="mGR-5v-sBw"/>
+                            <constraint firstItem="LLh-NW-qX9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="80" id="rdj-un-Zbi"/>
+                            <constraint firstItem="QmY-aR-PTl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="yE7-YE-YSG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="speedReadingLabel" destination="LLh-NW-qX9" id="U9b-SR-Vrv"/>
+                        <outlet property="textField" destination="QmY-aR-PTl" id="vo8-5K-ZH2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

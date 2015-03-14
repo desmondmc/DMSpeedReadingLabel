@@ -420,6 +420,7 @@
 				7ABD592D1AB391FB00559448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7ABD592E1AB391FB00559448 /* Build configuration list for PBXNativeTarget "DMSpeedReadingLabelDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +429,7 @@
 				7ABD59301AB391FB00559448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

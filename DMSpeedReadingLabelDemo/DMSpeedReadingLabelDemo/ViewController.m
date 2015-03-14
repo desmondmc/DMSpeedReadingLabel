@@ -12,6 +12,8 @@
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet DMSpeedReadingLabel *speedReadingLabel;
+@property (strong, nonatomic) IBOutlet UITextField *delayField;
+@property (strong, nonatomic) IBOutlet UITextField *repetitionsField;
 
 @end
 
@@ -28,9 +30,15 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onCreatePress:(id)sender {
-    self.speedReadingLabel.text = self.textField.text;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *delay = [formatter numberFromString:_delayField.text];
+    NSNumber *repetitions = [formatter numberFromString:_repetitionsField.text];
+    
+
+    self.speedReadingLabel.speedReadingText = self.textField.text;
     [self.speedReadingLabel setHidden:NO];
-    [self.speedReadingLabel animateWithDelayInSeconds:0.20 andLoopForever:YES];
+    [self.speedReadingLabel animateWithDelayInSeconds:delay.floatValue andRepetitions:repetitions.integerValue];
 }
 
 @end

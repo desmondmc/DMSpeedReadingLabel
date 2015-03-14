@@ -10,6 +10,10 @@
 
 @interface DMSpeedReadingLabel : UILabel
 
-- (void) animateWithDelayInSeconds:(NSTimeInterval)delay andLoopForever:(BOOL)loopForever;
+// Setting this property will output as speed reading text in the label
+@property (strong, nonatomic) NSString *speedReadingText;
+
+// Setting repetitions to 0 will animate forever.
+- (void) animateWithDelayInSeconds:(NSTimeInterval)delay andRepetitions:(NSInteger)repetitions;
 
 @end

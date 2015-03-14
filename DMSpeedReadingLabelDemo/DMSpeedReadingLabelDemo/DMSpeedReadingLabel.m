@@ -8,30 +8,84 @@
 
 #import "DMSpeedReadingLabel.h"
 
+@interface DMSpeedReadingLabel ()
+
+@property NSTimeInterval delay;
+@property NSInteger currentWordIndex;
+@property NSArray *partsOfText;
+@property NSInteger repetitions;
+@property NSInteger repetitionCounter;
+@property BOOL isAnimating;
+
+@end
+
 @implementation DMSpeedReadingLabel
 
-- (void) animateWithDelayInSeconds:(NSTimeInterval)delay andLoopForever:(BOOL)loopForever {
+- (void) animateWithDelayInSeconds:(NSTimeInterval)delay andRepetitions:(NSInteger)repetitions {
+    if (_isAnimating == NO) {
+        _delay = delay;
+        _repetitions = repetitions;
+        _repetitionCounter = 0;
+        _isAnimating = YES;
+        
+        [self initLabelText];
+        
+        [self startTimerEvents];
+    }
+}
+
+#pragma mark Events
+- (void)delayTimerExpired {
+    self.text = [_partsOfText objectAtIndex:_currentWordIndex];
+    [self incrementCurrentWordIndex];
+}
+
+- (void)speedTextChanged {
+    //Create a new array and reset the index.
+    [self initLabelText];
+}
+
+#pragma mark Setters
+
+- (void)setSpeedReadingText:(NSString *)speedReadingText {
+    _speedReadingText = speedReadingText;
+    [self speedTextChanged];
+}
+
+#pragma mark Helpers
+- (void)incrementCurrentWordIndex {
+    if (_currentWordIndex < [_partsOfText count] - 1) {
+        _currentWordIndex++;
+    } else {
+        //We've cycled through all the word count a repetition and reset wordIndex.
+        _repetitionCounter++;
+
+        _currentWordIndex = 0;
+    }
+}
+
+- (void)initLabelText {
+    _currentWordIndex = 0;
+    NSArray *blankTextArray = [NSArray arrayWithObject:@""];
+    
+    _partsOfText = [blankTextArray arrayByAddingObjectsFromArray:[_speedReadingText componentsSeparatedByString: @" "]];
+    self.text = [_partsOfText objectAtIndex:_currentWordIndex];
+}
+
+- (void)startTimerEvents {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        NSArray *parts = [self.text componentsSeparatedByString: @" "];
-        //Background Thread
-        while (loopForever) {
-            if ([parts count] > 0) {
-                dispatch_async(dispatch_get_main_queue(), ^(void){
-                    self.text = [parts objectAtIndex:0];;
-                });
+        while (YES) {
+            if (_repetitions != 0 && _repetitionCounter >= _repetitions) {
+                break;
             }
             
-            if ([parts count] > 1) {
-                //start at the second part.
-                for (int partsIndex = 1; partsIndex < [parts count]; partsIndex++) {
-                    [NSThread sleepForTimeInterval:delay];
-                    dispatch_async(dispatch_get_main_queue(), ^(void){
-                        self.text = [parts objectAtIndex:partsIndex];
-                    });
-                }
-            }
-            [NSThread sleepForTimeInterval:delay];
+            [NSThread sleepForTimeInterval:_delay];
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self delayTimerExpired];
+            });
         }
+        _isAnimating = NO;
     });
 }
+
 @end

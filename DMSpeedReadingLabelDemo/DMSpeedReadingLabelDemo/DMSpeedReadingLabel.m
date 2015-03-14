@@ -10,21 +10,23 @@
 
 @interface DMSpeedReadingLabel ()
 
-@property NSTimeInterval delay;
 @property NSInteger currentWordIndex;
 @property NSArray *partsOfText;
-@property NSInteger repetitions;
 @property NSInteger repetitionCounter;
+@property NSTimeInterval delay;
 @property BOOL isAnimating;
 
 @end
 
 @implementation DMSpeedReadingLabel
 
-- (void) animateWithDelayInSeconds:(NSTimeInterval)delay andRepetitions:(NSInteger)repetitions {
+- (void) animate {
     if (_isAnimating == NO) {
-        _delay = delay;
-        _repetitions = repetitions;
+        if (_wordsPerMinute == 0) {
+            _delay = 1;
+        } else {
+            _delay = [self getDelayFromWordsPerMinute:_wordsPerMinute];
+        }
         _repetitionCounter = 0;
         _isAnimating = YES;
         
@@ -62,6 +64,10 @@
 
         _currentWordIndex = 0;
     }
+}
+
+- (NSTimeInterval)getDelayFromWordsPerMinute:(NSInteger)wpm {
+    return 60/((NSTimeInterval)wpm);
 }
 
 - (void)initLabelText {

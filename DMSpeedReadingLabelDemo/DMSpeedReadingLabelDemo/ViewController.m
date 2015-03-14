@@ -12,7 +12,7 @@
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet DMSpeedReadingLabel *speedReadingLabel;
-@property (strong, nonatomic) IBOutlet UITextField *delayField;
+@property (strong, nonatomic) IBOutlet UITextField *wpmField;
 @property (strong, nonatomic) IBOutlet UITextField *repetitionsField;
 
 @end
@@ -32,13 +32,15 @@
 - (IBAction)onCreatePress:(id)sender {
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *delay = [formatter numberFromString:_delayField.text];
+    NSNumber *wpm = [formatter numberFromString:_wpmField.text];
     NSNumber *repetitions = [formatter numberFromString:_repetitionsField.text];
     
 
     self.speedReadingLabel.speedReadingText = self.textField.text;
+    self.speedReadingLabel.repetitions = repetitions.integerValue;
+    self.speedReadingLabel.wordsPerMinute = wpm.integerValue;
     [self.speedReadingLabel setHidden:NO];
-    [self.speedReadingLabel animateWithDelayInSeconds:delay.floatValue andRepetitions:repetitions.integerValue];
+    [self.speedReadingLabel animate];
 }
 
 @end

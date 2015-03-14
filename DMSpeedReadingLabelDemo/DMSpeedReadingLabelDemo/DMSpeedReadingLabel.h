@@ -13,7 +13,13 @@
 // Setting this property will output as speed reading text in the label
 @property (strong, nonatomic) NSString *speedReadingText;
 
+// Defaults to 0 which is infinite.
+@property NSInteger repetitions;
+
+// Defaults to 60
+@property NSInteger wordsPerMinute;
+
 // Setting repetitions to 0 will animate forever.
-- (void) animateWithDelayInSeconds:(NSTimeInterval)delay andRepetitions:(NSInteger)repetitions;
+- (void) animate;
 
 @end

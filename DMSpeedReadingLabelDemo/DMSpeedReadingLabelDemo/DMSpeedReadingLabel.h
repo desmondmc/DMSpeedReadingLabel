@@ -19,7 +19,7 @@
 // Defaults to 60
 @property NSInteger wordsPerMinute;
 
-// Setting repetitions to 0 will animate forever.
+// Start animating label. Currently the label can't be reanimated until it is complete.
 - (void) animate;
 
 @end
